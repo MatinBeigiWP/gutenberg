@@ -23,8 +23,6 @@ import { store as blockEditorStore } from '../../../store';
  *                                           block with this ID.
  * @property {boolean=}  isAppender          Whether the inserter is an appender
  *                                           or not.
- * @property {boolean=}  selectBlockOnInsert Whether the block should be
- *                                           selected on insert.
  * @property {Function=} onSelect            Called after insertion.
  */
 
@@ -39,7 +37,6 @@ function useInsertionPoint( {
 	insertionIndex,
 	clientId,
 	isAppender,
-	selectBlockOnInsert,
 	onSelect,
 } ) {
 	const {
@@ -113,7 +110,7 @@ function useInsertionPoint( {
 					selectedBlock.clientId,
 					blocks,
 					null,
-					null,
+					undefined,
 					meta
 				);
 			} else {
@@ -121,20 +118,18 @@ function useInsertionPoint( {
 					blocks,
 					destinationIndex,
 					destinationRootClientId,
-					selectBlockOnInsert,
+					false,
 					meta
 				);
 			}
 
-			if ( ! selectBlockOnInsert ) {
-				// translators: %d: the name of the block that has been added
-				const message = _n(
-					'%d block added.',
-					'%d blocks added.',
-					blocks.length
-				);
-				speak( message );
-			}
+			// translators: %d: the name of the block that has been added
+			const message = _n(
+				'%d block added.',
+				'%d blocks added.',
+				blocks.length
+			);
+			speak( message );
 
 			if ( onSelect ) {
 				onSelect();
@@ -147,7 +142,6 @@ function useInsertionPoint( {
 			insertBlocks,
 			destinationRootClientId,
 			destinationIndex,
-			selectBlockOnInsert,
 			onSelect,
 		]
 	);
