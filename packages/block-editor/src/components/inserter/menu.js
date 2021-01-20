@@ -28,6 +28,7 @@ function InserterMenu( {
 	onSelect,
 	showInserterHelpPanel,
 	showMostUsedBlocks,
+	shouldFocusBlock = true,
 } ) {
 	const [ filterValue, setFilterValue ] = useState( '' );
 	const [ hoveredItem, setHoveredItem ] = useState( null );
@@ -44,6 +45,7 @@ function InserterMenu( {
 		clientId,
 		isAppender,
 		insertionIndex: __experimentalInsertionIndex,
+		shouldFocusBlock,
 	} );
 	const { hasPatterns, hasReusableBlocks } = useSelect( ( select ) => {
 		const {
@@ -177,6 +179,7 @@ function InserterMenu( {
 							clientId={ clientId }
 							isAppender={ isAppender }
 							showBlockDirectory
+							shouldFocusBlock={ shouldFocusBlock }
 						/>
 					) }
 					{ ! filterValue && ( showPatterns || hasReusableBlocks ) && (
