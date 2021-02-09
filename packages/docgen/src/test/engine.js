@@ -4,8 +4,8 @@
 const engine = require( '../engine' );
 
 describe( 'Engine', () => {
-	it( 'should return a void IR for undefined code', () => {
-		const { ir } = engine( undefined );
-		expect( ir ).toHaveLength( 0 );
+	it( 'should return an empty result for undefined code', () => {
+		const result = engine( undefined );
+		expect( result ).toBeNull();
 	} );
 } );
